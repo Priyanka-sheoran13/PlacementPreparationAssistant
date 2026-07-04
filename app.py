@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from data.easy_questions import easy_questions
 from data.medium_questions import medium_questions
+from data.hard_questions import hard_questions
 app = Flask(__name__)
 
 # Database Configuration
@@ -174,7 +175,10 @@ def medium_result():
     )
 @app.route("/hard")
 def hard():
-    return render_template("hard.html")
+    return render_template(
+        "hard.html",
+        questions=hard_questions
+    )
 @app.route("/easy-result", methods=["POST"])
 def easy_result():
 
@@ -200,6 +204,36 @@ def easy_result():
 
     return render_template(
         "easy_result.html",
+        score=score,
+        total=total,
+        percentage=percentage,
+        grade=grade
+    )
+@app.route("/hard-result", methods=["POST"])
+def hard_result():
+
+    score = 0
+    total = len(hard_questions)
+
+    for i, q in enumerate(hard_questions):
+        if request.form.get(f"q{i}") == q["answer"]:
+            score += 1
+
+    percentage = round((score / total) * 100)
+
+    if percentage >= 90:
+        grade = "A+"
+    elif percentage >= 80:
+        grade = "A"
+    elif percentage >= 70:
+        grade = "B"
+    elif percentage >= 60:
+        grade = "C"
+    else:
+        grade = "Fail"
+
+    return render_template(
+        "hard_result.html",
         score=score,
         total=total,
         percentage=percentage,

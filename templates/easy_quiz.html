@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Easy Aptitude Quiz</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+                body {
+                        background: #eef3ff;
+                        font-family: Arial, Helvetica, sans-serif;
+                }
+
+                .quiz-card {
+                        max-width: 900px;
+                        margin: 40px auto;
+                        background: white;
+                        padding: 40px;
+                        border-radius: 20px;
+                        box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+                }
+
+                .timer {
+                        font-size: 28px;
+                        font-weight: bold;
+                        color: red;
+                }
+
+                .question {
+                        font-size: 24px;
+                        font-weight: bold;
+                }
+
+                .option {
+                        margin-top: 15px;
+                        padding: 12px;
+                        border: 1px solid #ddd;
+                        border-radius: 10px;
+                        cursor: pointer;
+                        transition: .3s;
+                }
+
+                .option:hover {
+                        background: #0d6efd;
+                        color: white;
+                }
+
+                .progress {
+                        height: 18px;
+                }
+
+                .btn {
+                        min-width: 120px;
+                }
+        </style>
+
+</head>
+
+<body>
+
+        <div class="container">
+
+                <div class="quiz-card">
+
+                        <div class="d-flex justify-content-between align-items-center">
+
+                                <h2>
+                                        🟢 Easy Aptitude Test
+                                </h2>
+
+                                <div class="timer" id="timer">
+                                        20:00
+                                </div>
+
+                        </div>
+
+                        <br>
+
+                        <div class="progress">
+
+                                <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated"
+                                        style="width:0%">
+                                </div>
+
+                        </div>
+
+                        <br>
+
+                        <form id="quizForm" action="/easy-result" method="POST">
+
+                                <div id="quizContainer">
+
+                                </div>
+
+                                <br>
+
+                                <div class="text-center">
+
+                                        <button type="button" class="btn btn-primary" onclick="previousQuestion()">
+
+                                                Previous
+
+                                        </button>
+
+                                        <button type="button" class="btn btn-success" onclick="nextQuestion()">
+
+                                                Next
+
+                                        </button>
+
+                                        <button type="submit" class="btn btn-danger">
+
+                                                Submit
+                                                <script>
+
+                                                        const questions = {{ questions| tojson }};
+
+                                                        let currentQuestion = 0;
+                                                        let answers = new Array(questions.length).fill("");
+
+                                                        function loadQuestion() {
+
+                                                                let q = questions[currentQuestion];
+
+                                                                let html = `
+                <h4 class="mb-4">
+                    Question ${currentQuestion + 1} of ${questions.length}
+                </h4>
+        
+                <div class="question mb-4">
+                    ${q.question}
+                </div>
+            `;
+
+                                                                q.options.forEach(option => {
+
+                                                                        html += `
+        
+                <div class="form-check option">
+        
+                        <input
+    class="form-check-input"
+    type="radio"
+    name="q${currentQuestion}"
+    value="${option}"
+    ${answers[currentQuestion] === option ? "checked" : ""}
+    onchange="
+answers[currentQuestion]='${option}';
+loadQuestion();
+"
+>
+                    <label class="form-check-label">
+        
+                        ${option}
+        
+                    </label>
+        
+                </div>
+        
+                `;
+
+                                                                });
+
+                                                                document.getElementById("quizContainer").innerHTML = html;
+                                                                let hiddenInputs = "";
+
+                                                                answers.forEach((answer, index) => {
+                                                                        hiddenInputs += `
+        <input type="hidden" name="q${index}" value="${answer}">
+    `;
+                                                                });
+
+                                                                document.getElementById("quizForm").querySelectorAll(".hidden-answer").forEach(e => e.remove());
+
+                                                                const hiddenDiv = document.createElement("div");
+                                                                hiddenDiv.className = "hidden-answer";
+                                                                hiddenDiv.innerHTML = hiddenInputs;
+
+                                                                document.getElementById("quizForm").appendChild(hiddenDiv);
+
+                                                                let progress = ((currentQuestion + 1) / questions.length) * 100;
+
+                                                                document.getElementById("progressBar").style.width = progress + "%";
+
+                                                        }
+
+                                                        function nextQuestion() {
+
+                                                                if (currentQuestion < questions.length - 1) {
+
+                                                                        currentQuestion++;
+
+                                                                        loadQuestion();
+
+                                                                }
+
+                                                        }
+
+                                                        function previousQuestion() {
+
+                                                                if (currentQuestion > 0) {
+
+                                                                        currentQuestion--;
+
+                                                                        loadQuestion();
+
+                                                                }
+
+                                                        }
+
+                                                        loadQuestion();
+
+
+                                                        let timeLeft = 20 * 60;
+
+                                                        function startTimer() {
+
+                                                                const timer = document.getElementById("timer");
+
+                                                                const interval = setInterval(function () {
+
+                                                                        let minutes = Math.floor(timeLeft / 60);
+                                                                        let seconds = timeLeft % 60;
+
+                                                                        timer.innerHTML =
+                                                                                String(minutes).padStart(2, "0") + ":" +
+                                                                                String(seconds).padStart(2, "0");
+
+                                                                        if (timeLeft <= 0) {
+
+                                                                                clearInterval(interval);
+
+                                                                                alert("Time is over!");
+
+                                                                                document.getElementById("quizForm").submit();
+
+                                                                        }
+
+                                                                        timeLeft--;
+
+                                                                }, 1000);
+
+                                                        }
+
+                                                        startTimer();
+
+                                                </script>
+
+                                        </button>
+
+                                </div>
+
+                        </form>
+
+                </div>
+
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Easy Aptitude Test</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+                body {
+                        background: #eef5ff;
+                }
+
+                .quiz-box {
+                        max-width: 850px;
+                        margin: auto;
+                        margin-top: 50px;
+                        background: white;
+                        padding: 40px;
+                        border-radius: 20px;
+                        box-shadow: 0 0 20px rgba(0, 0, 0, .1);
+                }
+
+                .timer {
+                        font-size: 22px;
+                        font-weight: bold;
+                        color: red;
+                        text-align: right;
+                }
+        </style>
+
+</head>
+
+<body>
+
+        <div class="quiz-box">
+
+                <h2 class="mb-4">
+                        🟢 Easy Aptitude Test
+                </h2>
+
+                <div class="timer">
+                        ⏰ Time Left :
+                        <span id="time">10:00</span>
+                </div>
+
+                <hr>
+
+                <form action="/easy-result" method="POST">
+
+                        <h5>1. 15 + 20 = ?</h5>
+
+                        <input type="radio" name="q1" value="30">30<br>
+                        <input type="radio" name="q1" value="35">35<br>
+                        <input type="radio" name="q1" value="40">40<br>
+
+                        <hr>
+
+                        <h5>2. Square of 12 ?</h5>
+
+                        <input type="radio" name="q2" value="121">121<br>
+                        <input type="radio" name="q2" value="144">144<br>
+                        <input type="radio" name="q2" value="169">169<br>
+
+                        <hr>
+
+                        <h5>3. 7 × 8 = ?</h5>
+
+                        <input type="radio" name="q3" value="54">54<br>
+                        <input type="radio" name="q3" value="56">56<br>
+                        <input type="radio" name="q3" value="58">58<br>
+
+                        <hr>
+
+                        <button class="btn btn-success btn-lg">
+                                Submit Test
+                        </button>
+
+                </form>
+
+        </div>
+
+        <script>
+
+                let time = 600;
+
+                setInterval(function () {
+
+                        let m = Math.floor(time / 60);
+                        let s = time % 60;
+
+                        document.getElementById("time").innerHTML =
+                                m + ":" + (s < 10 ? "0" : "") + s;
+
+                        time--;
+
+                        if (time < 0) {
+
+                                document.forms[0].submit();
+
+                        }
+
+                }, 1000);
+
+        </script>
+
+</body>
+
+</html>

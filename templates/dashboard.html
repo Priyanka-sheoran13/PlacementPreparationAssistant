@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Dashboard</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+
+                <div class="container">
+
+                        <a class="navbar-brand fw-bold">
+                                🎓 Placement Preparation Assistant
+                        </a>
+
+                        <div>
+
+                                <a href="/" class="btn btn-light me-2">
+                                        Home
+                                </a>
+
+                                <a href="/logout" class="btn btn-danger">
+                                        Logout
+                                </a>
+
+                        </div>
+
+                </div>
+
+        </nav>
+
+
+        <div class="container mt-5">
+
+                <div class="p-5 bg-white rounded shadow">
+
+                        <h2 class="fw-bold text-primary">
+
+                                👋 Welcome to Your Dashboard
+
+                        </h2>
+
+                        <p class="text-muted">
+
+                                Start your placement preparation today.
+
+                        </p>
+
+                        <hr>
+
+                        <h5>Today's Goal</h5>
+
+                        <div class="progress mb-4">
+
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" style="width:60%;">
+
+                                        60%
+
+                                </div>
+
+                        </div>
+
+                </div>
+
+        </div>
+
+
+        <div class="container mt-5">
+
+                <div class="row g-4">
+
+                        <div class="col-md-3">
+
+                                <a href="/aptitude" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>📊</h1>
+
+                                                <h5>Aptitude</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/coding" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>💻</h1>
+
+                                                <h5>Coding</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/resume" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>📄</h1>
+
+                                                <h5>Resume</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/interview" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>🎤</h1>
+
+                                                <h5>Interview</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/company" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>🏢</h1>
+
+                                                <h5>Companies</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/planner" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>📅</h1>
+
+                                                <h5>Study Planner</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/progress" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>📈</h1>
+
+                                                <h5>Progress</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+
+                        <div class="col-md-3">
+
+                                <a href="/ai" class="text-decoration-none">
+
+                                        <div class="card shadow text-center p-4">
+
+                                                <h1>🤖</h1>
+
+                                                <h5>AI Assistant</h5>
+
+                                        </div>
+
+                                </a>
+
+                        </div>
+
+                </div>
+
+        </div>
+
+
+
+        <div class="container mt-5">
+
+                <div class="row">
+
+                        <div class="col-md-6">
+
+                                <div class="card shadow">
+
+                                        <div class="card-body">
+
+                                                <h4>
+
+                                                        🏢 Upcoming Companies
+
+                                                </h4>
+
+                                                <ul>
+
+                                                        <li>TCS</li>
+
+                                                        <li>Infosys</li>
+
+                                                        <li>Accenture</li>
+
+                                                        <li>Capgemini</li>
+
+                                                        <li>Wipro</li>
+
+                                                </ul>
+
+                                        </div>
+
+                                </div>
+
+                        </div>
+
+
+
+                        <div class="col-md-6">
+
+                                <div class="card shadow">
+
+                                        <div class="card-body">
+
+                                                <h4>
+
+                                                        🔥 Motivation
+
+                                                </h4>
+
+                                                <h5>
+
+                                                        "The future depends on what you do today."
+
+                                                </h5>
+
+                                        </div>
+
+                                </div>
+
+                        </div>
+
+                </div>
+
+        </div>
+
+
+        <footer class="bg-primary text-white text-center mt-5 p-3">
+
+                Placement Preparation Assistant © 2026
+
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

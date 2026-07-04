@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Medium Aptitude Quiz</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+                body {
+                        background: #f4f7fc;
+                        font-family: Arial, sans-serif;
+                }
+
+                .quiz-box {
+                        max-width: 900px;
+                        margin: 40px auto;
+                        background: white;
+                        padding: 30px;
+                        border-radius: 15px;
+                        box-shadow: 0 0 15px rgba(0, 0, 0, .15);
+                }
+
+                .question {
+                        font-size: 22px;
+                        font-weight: bold;
+                }
+
+                .option {
+                        padding: 12px;
+                        margin-top: 12px;
+                        border: 1px solid #ddd;
+                        border-radius: 8px;
+                        cursor: pointer;
+                }
+
+                .option:hover {
+                        background: #fff8dc;
+                }
+
+                #timer {
+                        font-size: 24px;
+                        font-weight: bold;
+                        color: red;
+                }
+        </style>
+
+</head>
+
+<body>
+
+        <div class="container">
+
+                <div class="row">
+
+                        <!-- Quiz Section -->
+                        <div class="col-lg-9">
+
+                                <!-- Yahan tumhara existing quiz-box rahega -->
+
+                                <div class="quiz-box">
+
+                                        <h2 class="text-center text-warning">
+
+                                                🟡 Medium Aptitude Quiz
+
+                                        </h2>
+
+                                        <hr>
+
+                                        <div class="d-flex justify-content-between">
+
+                                                <h5>
+
+                                                        Time Left :
+                                                        <span id="timer">
+
+                                                                30:00
+
+                                                        </span>
+
+                                                </h5>
+
+                                                <h5>
+
+                                                        Question
+                                                        <span id="questionNo">
+
+                                                                1
+
+                                                        </span>
+
+                                                        /
+
+                                                        {{ questions|length }}
+
+                                                </h5>
+
+                                        </div>
+
+                                        <div class="progress mt-3 mb-4">
+
+                                                <div id="progressBar" class="progress-bar bg-warning" style="width:0%">
+
+                                                </div>
+
+                                        </div>
+
+                                        <form id="quizForm" method="POST" action="/medium-result">
+
+                                                <div id="quizContainer">
+
+                                                </div>
+
+                                                <br>
+
+                                                <div class="text-center">
+
+                                                        <button type="button" class="btn btn-secondary"
+                                                                onclick="previousQuestion()">
+
+                                                                Previous
+
+                                                        </button>
+
+                                                        <button type="button" class="btn btn-warning"
+                                                                onclick="nextQuestion()">
+
+                                                                Next
+
+                                                        </button>
+
+                                                        <button type="submit" class="btn btn-success">
+
+                                                                Submit Quiz
+
+                                                        </button>
+
+                                                </div>
+
+                                        </form>
+                                        </form>
+
+                                        <hr>
+
+                                        <div class="card p-3 mt-3">
+
+                                                <h5 class="text-center">
+                                                        Question Palette
+                                                </h5>
+
+                                                <div id="palette" class="d-flex flex-wrap gap-2 justify-content-center">
+
+                                                </div>
+
+                                        </div>
+
+                                        <script>
+
+                                                const questions = {{ questions | tojson }};
+
+                                                let currentQuestion = 0;
+                                                let answers = new Array(questions.length).fill(null);
+
+                                                function loadQuestion() {
+
+                                                        let q = questions[currentQuestion];
+
+                                                        let html = `
+                <div class="question">
+                    ${currentQuestion + 1}. ${q.question}
+                </div>
+                <br>
+            `;
+
+                                                        q.options.forEach(function (option) {
+
+                                                                html += `
+                <div class="form-check option">
+        
+                    <input
+                        class="form-check-input"
+                        type="radio"
+                        name="q${currentQuestion}"
+                        value="${option}"
+                        ${answers[currentQuestion] === option ? "checked" : ""}
+                        onchange="answers[currentQuestion]='${option}'; loadQuestion();">
+        
+                    <label class="form-check-label">
+        
+                        ${option}
+        
+                    </label>
+        
+                </div>
+                `;
+
+                                                        });
+
+                                                        document.getElementById("quizContainer").innerHTML = html;
+
+                                                        document.getElementById("questionNo").innerHTML = currentQuestion + 1;
+
+                                                        let progress = ((currentQuestion + 1) / questions.length) * 100;
+
+                                                        document.getElementById("progressBar").style.width = progress + "%";
+                                                        let palette = "";
+
+                                                        for (let i = 0; i < questions.length; i++) {
+
+                                                                let color = "btn-outline-secondary";
+
+                                                                if (answers[i] != null) {
+                                                                        color = "btn-success";
+                                                                }
+
+                                                                if (i == currentQuestion) {
+                                                                        color = "btn-warning";
+                                                                }
+
+                                                                palette += `
+        <button
+            type="button"
+            class="btn ${color}"
+            onclick="jumpQuestion(${i})">
+
+            ${i + 1}
+
+        </button>
+    `;
+                                                        }
+
+                                                        document.getElementById("palette").innerHTML = palette;
+                                                }
+
+                                                function nextQuestion() {
+
+                                                        if (currentQuestion < questions.length - 1) {
+
+                                                                currentQuestion++;
+
+                                                                loadQuestion();
+
+                                                        }
+
+                                                }
+
+                                                function previousQuestion() {
+
+                                                        if (currentQuestion > 0) {
+
+                                                                currentQuestion--;
+
+                                                                loadQuestion();
+
+                                                        }
+
+                                                }
+                                                function jumpQuestion(index) {
+
+                                                        currentQuestion = index;
+
+                                                        loadQuestion();
+
+                                                }
+
+                                                loadQuestion();
+
+                                        </script>
+                                        <script>
+
+                                                let timeLeft = 30 * 60;
+
+                                                const timer = setInterval(function () {
+
+                                                        let minutes = Math.floor(timeLeft / 60);
+                                                        let seconds = timeLeft % 60;
+
+                                                        document.getElementById("timer").innerHTML =
+                                                                String(minutes).padStart(2, "0") + ":" +
+                                                                String(seconds).padStart(2, "0");
+
+                                                        if (timeLeft <= 0) {
+
+                                                                clearInterval(timer);
+
+                                                                alert("Time Over! Quiz Submitted.");
+
+                                                                document.getElementById("quizForm").submit();
+
+                                                        }
+
+                                                        timeLeft--;
+
+                                                }, 1000);
+
+                                        </script>
+
+                                </div>
+
+
+                        </div>
+
+</body>
+
+</html>

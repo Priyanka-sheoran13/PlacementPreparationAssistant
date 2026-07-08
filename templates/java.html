@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Java Coding Practice</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+
+        <style>
+                body {
+
+                        background: #edf2f7;
+
+                        font-family: Arial, Helvetica, sans-serif;
+
+                }
+
+                .header {
+
+                        background: linear-gradient(135deg, #ff5722, #ff9800);
+
+                        color: white;
+
+                        padding: 45px;
+
+                        text-align: center;
+
+                        box-shadow: 0px 5px 15px rgba(0, 0, 0, .2);
+
+                }
+
+                .header h1 {
+
+                        font-size: 45px;
+
+                        font-weight: bold;
+
+                }
+
+                .header p {
+
+                        font-size: 18px;
+
+                        margin-top: 10px;
+
+                }
+
+                .main-box {
+
+                        max-width: 1200px;
+
+                        margin: auto;
+
+                        margin-top: 35px;
+
+                        margin-bottom: 40px;
+
+                }
+
+                .card {
+
+                        border: none;
+
+                        border-radius: 18px;
+
+                        padding: 30px;
+
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
+
+                }
+
+                .progress {
+
+                        height: 18px;
+
+                        border-radius: 20px;
+
+                }
+
+                .progress-bar {
+
+                        font-weight: bold;
+
+                }
+
+                #questionTitle {
+
+                        font-size: 32px;
+
+                        font-weight: bold;
+
+                        margin-top: 20px;
+
+                        color: #ff5722;
+
+                }
+
+                .badge {
+
+                        font-size: 15px;
+
+                        padding: 10px 15px;
+
+                }
+
+                .info-box {
+
+                        background: #f8f9fa;
+
+                        padding: 15px;
+
+                        border-left: 5px solid #ff9800;
+
+                        border-radius: 10px;
+
+                        margin-bottom: 20px;
+
+                }
+
+                pre {
+
+                        background: #212529;
+
+                        color: #00ff88;
+
+                        padding: 15px;
+
+                        border-radius: 10px;
+
+                        font-size: 15px;
+
+                }
+
+                textarea {
+
+                        width: 100%;
+
+                        height: 320px;
+
+                        background: #1e1e1e;
+
+                        color: #ffffff;
+
+                        border: none;
+
+                        border-radius: 10px;
+
+                        padding: 15px;
+
+                        font-size: 15px;
+
+                        font-family: Consolas;
+
+                        resize: none;
+
+                }
+
+                textarea:focus {
+
+                        outline: none;
+
+                        box-shadow: 0 0 10px #ff9800;
+
+                }
+
+                .btn {
+
+                        border-radius: 10px;
+
+                        font-weight: bold;
+
+                }
+
+                #solutionBox {
+
+                        display: none;
+
+                        margin-top: 25px;
+
+                }
+
+                #resultBox {
+
+                        display: none;
+
+                        margin-top: 30px;
+
+                        text-align: center;
+
+                }
+
+                .result-card {
+
+                        background: white;
+
+                        padding: 35px;
+
+                        border-radius: 18px;
+
+                        box-shadow: 0px 8px 20px rgba(0, 0, 0, .15);
+
+                }
+
+                .result-card h1 {
+
+                        color: #ff5722;
+
+                        font-weight: bold;
+
+                }
+
+                .footer {
+
+                        text-align: center;
+
+                        padding: 25px;
+
+                        color: gray;
+
+                }
+        </style>
+
+</head>
+
+<body>
+
+        <div class="header">
+
+                <h1><i class="fab fa-java"></i> Java Coding Practice</h1>
+
+                <p>
+
+                        30 Placement Level Java Coding Questions
+
+                </p>
+
+        </div>
+
+        <div class="container">
+
+                <div class="main-box">
+
+                        <div class="card">
+
+                                <div class="d-flex justify-content-between align-items-center">
+
+                                        <h4 id="questionNo">
+
+                                                Question 1 / 30
+
+                                        </h4>
+
+                                        <span id="difficulty" class="badge bg-danger">
+
+                                                Hard
+
+                                        </span>
+
+                                </div>
+
+                                <div class="progress mt-3">
+
+                                        <div class="progress-bar bg-success" id="progressBar" style="width:3%">
+
+                                        </div>
+
+                                </div>
+
+                                <h2 id="questionTitle"></h2>
+
+                                <div class="info-box">
+
+                                        <strong>Topic :</strong>
+
+                                        <span id="topic"></span>
+
+                                </div>
+
+                                <p id="description"></p>
+
+                                <hr>
+
+                                <h5>📥 Sample Input</h5>
+
+                                <pre id="input"></pre>
+
+                                <h5 class="mt-4">📤 Sample Output</h5>
+
+                                <pre id="output"></pre>
+
+                                <hr>
+
+                                <h4>💻 Write Your Java Code</h4>
+
+                                <textarea id="codeEditor" placeholder="Write your Java code here...">
+
+</textarea>
+
+                                <br><br>
+
+                                <button class="btn btn-success" onclick="showSolution()">
+
+                                        <i class="fa-solid fa-eye"></i>
+
+                                        Show Solution
+
+                                </button>
+
+                                <button class="btn btn-primary" onclick="copySolution()">
+
+                                        <i class="fa-solid fa-copy"></i>
+
+                                        Copy Solution
+
+                                </button>
+
+                                <div id="solutionBox">
+
+                                        <h4 class="mt-4">
+
+                                                Java Solution
+
+                                        </h4>
+
+                                        <pre id="solution"></pre>
+
+                                </div>
+
+                                <div class="form-check mt-4">
+
+                                        <input type="checkbox" class="form-check-input" id="completed">
+
+                                        <label class="form-check-label">
+
+                                                Mark this question as completed
+
+                                        </label>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="d-flex justify-content-between">
+
+                                        <button class="btn btn-secondary" onclick="previousQuestion()">
+
+                                                ⬅ Previous
+
+                                        </button>
+
+                                        <button class="btn btn-success" onclick="nextQuestion()">
+
+                                                Next ➜
+
+                                        </button>
+
+                                </div>
+
+                                <div class="text-center mt-5">
+
+                                        <button class="btn btn-danger btn-lg" onclick="submitPractice()">
+
+                                                Submit Practice
+
+                                        </button>
+
+                                </div>
+
+                        </div>
+
+                        <div id="resultBox" class="result-card">
+
+                                <h1>
+
+                                        🎉 Java Practice Completed
+
+                                </h1>
+
+                                <h3 id="completedText"></h3>
+
+                                <h3 id="percentageText"></h3>
+
+                                <h3 id="gradeText"></h3>
+
+                                <button class="btn btn-success btn-lg mt-4" onclick="location.reload()">
+
+                                        Restart Practice
+
+                                </button>
+
+                        </div>
+
+                </div>
+
+        </div>
+
+        <div class="footer">
+
+                Made with ❤️ for Placement Preparation
+
+        </div>
+
+        <script>
+                let currentQuestion = 0;
+
+                let completed = [];
+
+                const questions = [];
+
+                function loadQuestion() {
+
+                        let q = questions[currentQuestion];
+
+                        document.getElementById("questionNo").innerHTML =
+                                "Question " + (currentQuestion + 1) + " / " + questions.length;
+
+                        document.getElementById("questionTitle").innerHTML = q.title;
+
+                        document.getElementById("topic").innerHTML = q.topic;
+
+                        document.getElementById("description").innerHTML = q.description;
+
+                        document.getElementById("input").textContent = q.input;
+
+                        document.getElementById("output").textContent = q.output;
+
+                        document.getElementById("solution").textContent = q.solution;
+
+                        document.getElementById("difficulty").innerHTML = q.difficulty;
+
+                        if (q.difficulty == "Hard") {
+
+                                document.getElementById("difficulty").className =
+                                        "badge bg-danger";
+
+                        }
+
+                        else if (q.difficulty == "Medium") {
+
+                                document.getElementById("difficulty").className =
+                                        "badge bg-warning text-dark";
+
+                        }
+
+                        else {
+
+                                document.getElementById("difficulty").className =
+                                        "badge bg-success";
+
+                        }
+
+                        document.getElementById("completed").checked =
+                                completed[currentQuestion] || false;
+
+                        document.getElementById("progressBar").style.width =
+                                ((currentQuestion + 1) / questions.length * 100) + "%";
+
+                        document.getElementById("progressBar").innerHTML =
+                                Math.round((currentQuestion + 1) / questions.length * 100) + "%";
+
+                        document.getElementById("solutionBox").style.display = "none";
+
+                }
+
+                function nextQuestion() {
+
+                        completed[currentQuestion] =
+                                document.getElementById("completed").checked;
+
+                        if (currentQuestion < questions.length - 1) {
+
+                                currentQuestion++;
+
+                                loadQuestion();
+
+                        }
+
+                }
+
+                function previousQuestion() {
+
+                        completed[currentQuestion] =
+                                document.getElementById("completed").checked;
+
+                        if (currentQuestion > 0) {
+
+                                currentQuestion--;
+
+                                loadQuestion();
+
+                        }
+
+                }
+
+                function showSolution() {
+
+                        document.getElementById("solutionBox").style.display = "block";
+
+                }
+
+                function copySolution() {
+
+                        navigator.clipboard.writeText(
+
+                                questions[currentQuestion].solution
+
+                        );
+
+                        alert("Solution Copied Successfully!");
+
+                }
+
+                function submitPractice() {
+
+                        completed[currentQuestion] =
+                                document.getElementById("completed").checked;
+
+                        let solved =
+                                completed.filter(x => x).length;
+
+                        let percentage =
+                                Math.round((solved / questions.length) * 100);
+                        localStorage.setItem("java", percentage);
+                        let grade = "Fail";
+
+                        if (percentage >= 90) {
+
+                                grade = "A+";
+
+                        }
+
+                        else if (percentage >= 80) {
+
+                                grade = "A";
+
+                        }
+
+                        else if (percentage >= 70) {
+
+                                grade = "B";
+
+                        }
+
+                        else if (percentage >= 60) {
+
+                                grade = "C";
+
+                        }
+
+                        document.querySelector(".card").style.display = "none";
+
+                        document.getElementById("resultBox").style.display = "block";
+
+                        document.getElementById("completedText").innerHTML =
+                                "Completed Questions : " + solved + " / " + questions.length;
+
+                        document.getElementById("percentageText").innerHTML =
+                                "Percentage : " + percentage + "%";
+
+                        document.getElementById("gradeText").innerHTML =
+                                "Grade : " + grade;
+
+                }
+                questions.push(
+
+                        {
+                                title: "Two Sum",
+                                topic: "Arrays",
+                                difficulty: "Medium",
+                                description: "Given an integer array nums and an integer target, return the indices of the two numbers such that they add up to target.",
+                                input: "nums = [2,7,11,15]\ntarget = 9",
+                                output: "[0,1]",
+                                solution: `class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            int diff = target - nums[i];
+            if(map.containsKey(diff)){
+                return new int[]{map.get(diff), i};
+            }
+            map.put(nums[i], i);
+        }
+        return new int[]{};
+    }
+}`
+                        },
+
+                        {
+                                title: "Reverse String",
+                                topic: "Strings",
+                                difficulty: "Easy",
+                                description: "Reverse the given string.",
+                                input: "Hello",
+                                output: "olleH",
+                                solution: `public class Main{
+    public static void main(String[] args){
+        String s="Hello";
+        String rev="";
+        for(int i=s.length()-1;i>=0;i--){
+            rev+=s.charAt(i);
+        }
+        System.out.println(rev);
+    }
+}`
+                        },
+
+                        {
+                                title: "Palindrome Number",
+                                topic: "Math",
+                                difficulty: "Easy",
+                                description: "Check whether a number is palindrome.",
+                                input: "121",
+                                output: "true",
+                                solution: `class Solution{
+    public boolean isPalindrome(int x){
+        String s=x+"";
+        return s.equals(new StringBuilder(s).reverse().toString());
+    }
+}`
+                        },
+
+                        {
+                                title: "Valid Parentheses",
+                                topic: "Stack",
+                                difficulty: "Medium",
+                                description: "Determine whether the brackets are balanced.",
+                                input: "()[]{}",
+                                output: "true",
+                                solution: `class Solution{
+    public boolean isValid(String s){
+        Stack<Character> st=new Stack<>();
+        for(char c:s.toCharArray()){
+            if(c=='(') st.push(')');
+            else if(c=='{') st.push('}');
+            else if(c=='[') st.push(']');
+            else{
+                if(st.isEmpty() || st.pop()!=c)
+                    return false;
+            }
+        }
+        return st.isEmpty();
+    }
+}`
+                        },
+
+                        {
+                                title: "Maximum Subarray",
+                                topic: "Dynamic Programming",
+                                difficulty: "Medium",
+                                description: "Find the maximum subarray sum.",
+                                input: "[-2,1,-3,4,-1,2,1,-5,4]",
+                                output: "6",
+                                solution: `class Solution{
+    public int maxSubArray(int[] nums){
+        int max=nums[0];
+        int cur=0;
+        for(int n:nums){
+            cur=Math.max(n,cur+n);
+            max=Math.max(max,cur);
+        }
+        return max;
+    }
+}`
+                        },
+
+                        {
+                                title: "Binary Search",
+                                topic: "Searching",
+                                difficulty: "Easy",
+                                description: "Find target using Binary Search.",
+                                input: "[1,2,3,4,5], target=4",
+                                output: "3",
+                                solution: `class Solution{
+    public int search(int[] nums,int target){
+        int l=0,r=nums.length-1;
+        while(l<=r){
+            int m=(l+r)/2;
+            if(nums[m]==target) return m;
+            if(nums[m]<target) l=m+1;
+            else r=m-1;
+        }
+        return -1;
+    }
+}`
+                        },
+
+                        {
+                                title: "Merge Sorted Arrays",
+                                topic: "Arrays",
+                                difficulty: "Medium",
+                                description: "Merge two sorted arrays.",
+                                input: "[1,2,4] [1,3,4]",
+                                output: "[1,1,2,3,4,4]",
+                                solution: `import java.util.Arrays;
+
+public class Main{
+    public static void main(String[] args){
+        int[] a={1,2,4};
+        int[] b={1,3,4};
+
+        int[] c=new int[a.length+b.length];
+
+        System.arraycopy(a,0,c,0,a.length);
+        System.arraycopy(b,0,c,a.length,b.length);
+
+        Arrays.sort(c);
+
+        System.out.println(Arrays.toString(c));
+    }
+}`
+                        },
+
+                        {
+                                title: "Longest Common Prefix",
+                                topic: "Strings",
+                                difficulty: "Medium",
+                                description: "Find the longest common prefix among strings.",
+                                input: "flower flow flight",
+                                output: "fl",
+                                solution: `class Solution{
+    public String longestCommonPrefix(String[] strs){
+        String pre=strs[0];
+        for(String s:strs){
+            while(!s.startsWith(pre)){
+                pre=pre.substring(0,pre.length()-1);
+            }
+        }
+        return pre;
+    }
+}`
+                        }
+
+                );
+                questions.push(
+
+                        {
+                                title: "Product of Array Except Self",
+                                topic: "Arrays",
+                                difficulty: "Medium",
+                                description: "Return an array where each element is the product of all other elements except itself.",
+                                input: "[1,2,3,4]",
+                                output: "[24,12,8,6]",
+                                solution: `class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n=nums.length;
+        int[] ans=new int[n];
+        ans[0]=1;
+        for(int i=1;i<n;i++)
+            ans[i]=ans[i-1]*nums[i-1];
+        int right=1;
+        for(int i=n-1;i>=0;i--){
+            ans[i]*=right;
+            right*=nums[i];
+        }
+        return ans;
+    }
+}`
+                        },
+
+                        {
+                                title: "Container With Most Water",
+                                topic: "Two Pointers",
+                                difficulty: "Medium",
+                                description: "Find the maximum amount of water a container can store.",
+                                input: "[1,8,6,2,5,4,8,3,7]",
+                                output: "49",
+                                solution: `class Solution{
+    public int maxArea(int[] h){
+        int l=0,r=h.length-1;
+        int ans=0;
+        while(l<r){
+            ans=Math.max(ans,
+            Math.min(h[l],h[r])*(r-l));
+            if(h[l]<h[r]) l++;
+            else r--;
+        }
+        return ans;
+    }
+}`
+                        },
+
+                        {
+                                title: "Longest Consecutive Sequence",
+                                topic: "HashSet",
+                                difficulty: "Hard",
+                                description: "Find the length of the longest consecutive sequence.",
+                                input: "[100,4,200,1,3,2]",
+                                output: "4",
+                                solution: `class Solution{
+    public int longestConsecutive(int[] nums){
+        HashSet<Integer> set=new HashSet<>();
+        for(int n:nums) set.add(n);
+
+        int best=0;
+
+        for(int n:set){
+            if(!set.contains(n-1)){
+                int cur=n;
+                int len=1;
+
+                while(set.contains(cur+1)){
+                    cur++;
+                    len++;
+                }
+
+                best=Math.max(best,len);
+            }
+        }
+        return best;
+    }
+}`
+                        },
+
+                        {
+                                title: "Find Duplicate Number",
+                                topic: "Arrays",
+                                difficulty: "Medium",
+                                description: "Find the duplicate element in an array.",
+                                input: "[1,3,4,2,2]",
+                                output: "2",
+                                solution: `class Solution{
+    public int findDuplicate(int[] nums){
+        HashSet<Integer> set=new HashSet<>();
+        for(int n:nums){
+            if(set.contains(n))
+                return n;
+            set.add(n);
+        }
+        return -1;
+    }
+}`
+                        },
+
+                        {
+                                title: "Top K Frequent Elements",
+                                topic: "Heap",
+                                difficulty: "Hard",
+                                description: "Return k most frequent elements.",
+                                input: "nums=[1,1,1,2,2,3], k=2",
+                                output: "[1,2]",
+                                solution: `class Solution{
+    public int[] topKFrequent(int[] nums,int k){
+        HashMap<Integer,Integer> map=new HashMap<>();
+
+        for(int n:nums)
+            map.put(n,map.getOrDefault(n,0)+1);
+
+        PriorityQueue<Integer> pq=
+        new PriorityQueue<>(
+            (a,b)->map.get(b)-map.get(a)
+        );
+
+        pq.addAll(map.keySet());
+
+        int[] ans=new int[k];
+
+        for(int i=0;i<k;i++)
+            ans[i]=pq.poll();
+
+        return ans;
+    }
+}`
+                        },
+
+                        {
+                                title: "Search in Rotated Sorted Array",
+                                topic: "Binary Search",
+                                difficulty: "Hard",
+                                description: "Search target in rotated sorted array.",
+                                input: "[4,5,6,7,0,1,2]",
+                                output: "4",
+                                solution: `class Solution{
+    public int search(int[] nums,int target){
+
+        int l=0,r=nums.length-1;
+
+        while(l<=r){
+
+            int m=(l+r)/2;
+
+            if(nums[m]==target)
+                return m;
+
+            if(nums[l]<=nums[m]){
+
+                if(target>=nums[l] && target<nums[m])
+                    r=m-1;
+                else
+                    l=m+1;
+
+            }
+
+            else{
+
+                if(target>nums[m] && target<=nums[r])
+                    l=m+1;
+                else
+                    r=m-1;
+
+            }
+
+        }
+
+        return -1;
+    }
+}`
+                        },
+
+                        {
+                                title: "3 Sum",
+                                topic: "Two Pointers",
+                                difficulty: "Hard",
+                                description: "Find all unique triplets that sum to zero.",
+                                input: "[-1,0,1,2,-1,-4]",
+                                output: "[[-1,-1,2],[-1,0,1]]",
+                                solution: `// Use Sorting + Two Pointer Approach`
+                        },
+
+                        {
+                                title: "Group Anagrams",
+                                topic: "HashMap",
+                                difficulty: "Hard",
+                                description: "Group all anagrams together.",
+                                input: "eat tea ate tan nat",
+                                output: "[[eat,tea,ate],[tan,nat]]",
+                                solution: `// Use HashMap<String,List<String>>`
+                        }
+
+                );
+                questions.push(
+
+                        {
+                                title: "Number of Islands",
+                                topic: "Graph (DFS)",
+                                difficulty: "Hard",
+                                description: "Count the number of islands in a 2D grid.",
+                                input: "grid[][]",
+                                output: "3",
+                                solution: `class Solution {
+    public int numIslands(char[][] grid) {
+        int count=0;
+        for(int i=0;i<grid.length;i++){
+            for(int j=0;j<grid[0].length;j++){
+                if(grid[i][j]=='1'){
+                    dfs(grid,i,j);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    void dfs(char[][] grid,int i,int j){
+
+        if(i<0||j<0||i>=grid.length||j>=grid[0].length||grid[i][j]=='0')
+            return;
+
+        grid[i][j]='0';
+
+        dfs(grid,i+1,j);
+        dfs(grid,i-1,j);
+        dfs(grid,i,j+1);
+        dfs(grid,i,j-1);
+
+    }
+}`
+                        },
+
+                        {
+                                title: "Course Schedule",
+                                topic: "Graph",
+                                difficulty: "Hard",
+                                description: "Determine if all courses can be completed.",
+                                input: "numCourses=2",
+                                output: "true",
+                                solution: `// Topological Sort (Kahn's Algorithm)`
+                        },
+
+                        {
+                                title: "Kth Largest Element",
+                                topic: "Heap",
+                                difficulty: "Hard",
+                                description: "Find kth largest element.",
+                                input: "[3,2,1,5,6,4], k=2",
+                                output: "5",
+                                solution: `class Solution{
+    public int findKthLargest(int[] nums,int k){
+
+        PriorityQueue<Integer> pq=new PriorityQueue<>();
+
+        for(int n:nums){
+
+            pq.offer(n);
+
+            if(pq.size()>k)
+                pq.poll();
+
+        }
+
+        return pq.peek();
+
+    }
+}`
+                        },
+
+                        {
+                                title: "Merge K Sorted Lists",
+                                topic: "Linked List",
+                                difficulty: "Hard",
+                                description: "Merge k sorted linked lists.",
+                                input: "Linked Lists",
+                                output: "Merged List",
+                                solution: `// Priority Queue Solution`
+                        },
+
+                        {
+                                title: "Trapping Rain Water",
+                                topic: "Two Pointers",
+                                difficulty: "Hard",
+                                description: "Calculate trapped rain water.",
+                                input: "[0,1,0,2,1,0,1,3]",
+                                output: "6",
+                                solution: `// Two Pointer Approach`
+                        },
+
+                        {
+                                title: "Word Ladder",
+                                topic: "Graph",
+                                difficulty: "Hard",
+                                description: "Find shortest transformation sequence.",
+                                input: "hit → cog",
+                                output: "5",
+                                solution: `// BFS Solution`
+                        },
+
+                        {
+                                title: "Median of Two Sorted Arrays",
+                                topic: "Binary Search",
+                                difficulty: "Hard",
+                                description: "Find median of two sorted arrays.",
+                                input: "[1,3] [2]",
+                                output: "2.0",
+                                solution: `// Binary Search Solution`
+                        },
+
+                        {
+                                title: "LRU Cache",
+                                topic: "Design",
+                                difficulty: "Hard",
+                                description: "Design an LRU Cache.",
+                                input: "Capacity = 2",
+                                output: "Cache Operations",
+                                solution: `// LinkedHashMap Solution`
+                        }
+
+                );
+                questions.push(
+
+                        {
+                                title: "N Queens",
+                                topic: "Backtracking",
+                                difficulty: "Hard",
+                                description: "Place N queens on the chessboard so that no two queens attack each other.",
+                                input: "n = 4",
+                                output: "2 Solutions",
+                                solution: `// Backtracking Solution`
+                        },
+
+                        {
+                                title: "Sudoku Solver",
+                                topic: "Backtracking",
+                                difficulty: "Hard",
+                                description: "Solve the given Sudoku board.",
+                                input: "9 x 9 Sudoku",
+                                output: "Solved Sudoku",
+                                solution: `// Backtracking + DFS`
+                        },
+
+                        {
+                                title: "Serialize Binary Tree",
+                                topic: "Trees",
+                                difficulty: "Hard",
+                                description: "Serialize and Deserialize a Binary Tree.",
+                                input: "Binary Tree",
+                                output: "Serialized Tree",
+                                solution: `// BFS / DFS Solution`
+                        },
+
+                        {
+                                title: "Alien Dictionary",
+                                topic: "Graph",
+                                difficulty: "Hard",
+                                description: "Find the order of characters in an alien language.",
+                                input: "['wrt','wrf','er','ett','rftt']",
+                                output: "wertf",
+                                solution: `// Topological Sort`
+                        },
+
+                        {
+                                title: "Minimum Window Substring",
+                                topic: "Sliding Window",
+                                difficulty: "Hard",
+                                description: "Find the smallest substring containing all characters of another string.",
+                                input: "ADOBECODEBANC",
+                                output: "BANC",
+                                solution: `// Sliding Window`
+                        },
+
+                        {
+                                title: "Regular Expression Matching",
+                                topic: "Dynamic Programming",
+                                difficulty: "Hard",
+                                description: "Implement regular expression matching using '.' and '*'.",
+                                input: "aab",
+                                output: "true",
+                                solution: `// Dynamic Programming`
+                        },
+
+                        {
+                                title: "Word Search",
+                                topic: "Backtracking",
+                                difficulty: "Hard",
+                                description: "Search a word in a 2D board.",
+                                input: "Board + Word",
+                                output: "true",
+                                solution: `// DFS + Backtracking`
+                        }
+
+                );
+
+                loadQuestion();
+
+        </script>
+
+</body>
+
+</html>

@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Resume Builder</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+                body {
+                        background: #eef3f8;
+                        font-family: Arial, Helvetica, sans-serif;
+                }
+
+                .header {
+                        background: linear-gradient(90deg, #0d6efd, #20c997);
+                        color: white;
+                        text-align: center;
+                        padding: 30px;
+                        margin-bottom: 30px;
+                }
+
+                .container {
+                        max-width: 1100px;
+                }
+
+                .card {
+                        border: none;
+                        border-radius: 15px;
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, .1);
+                }
+
+                .section-title {
+                        color: #0d6efd;
+                        font-weight: bold;
+                        margin-top: 20px;
+                        margin-bottom: 15px;
+                }
+
+                .form-control,
+                .form-select {
+                        border-radius: 10px;
+                }
+
+                textarea {
+                        resize: none;
+                }
+
+                .btn {
+                        margin-top: 10px;
+                }
+
+                .resume-preview {
+                        display: none;
+                }
+        </style>
+
+</head>
+
+<body>
+
+        <div class="header">
+
+                <h1>📄 Resume Builder</h1>
+
+                <p>Create a Professional ATS-Friendly Resume</p>
+
+        </div>
+
+        <div class="container">
+
+                <div class="card p-4">
+
+                        <form id="resumeForm">
+                                <!-- Personal Details -->
+
+                                <h3 class="section-title">👤 Personal Details</h3>
+
+                                <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Full Name</label>
+                                                <input type="text" class="form-control" id="name"
+                                                        placeholder="Enter your full name">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Email</label>
+                                                <input type="email" class="form-control" id="email"
+                                                        placeholder="Enter your email">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Phone Number</label>
+                                                <input type="text" class="form-control" id="phone"
+                                                        placeholder="Enter your phone number">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Address</label>
+                                                <input type="text" class="form-control" id="address"
+                                                        placeholder="Enter your address">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">LinkedIn Profile</label>
+                                                <input type="text" class="form-control" id="linkedin"
+                                                        placeholder="https://linkedin.com/in/username">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">GitHub Profile</label>
+                                                <input type="text" class="form-control" id="github"
+                                                        placeholder="https://github.com/username">
+                                        </div>
+
+                                </div>
+
+                                <!-- Career Objective -->
+
+                                <h3 class="section-title">🎯 Career Objective</h3>
+
+                                <div class="mb-4">
+
+                                        <textarea class="form-control" id="objective" rows="5"
+                                                placeholder="Write your career objective here..."></textarea>
+
+                                </div>
+                                <!-- Education -->
+
+                                <h3 class="section-title">🎓 Education</h3>
+
+                                <div class="row">
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">College Name</label>
+                                                <input type="text" class="form-control" id="college"
+                                                        placeholder="Enter your college name">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Degree</label>
+                                                <input type="text" class="form-control" id="degree"
+                                                        placeholder="B.Tech CSE">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">CGPA</label>
+                                                <input type="text" class="form-control" id="cgpa"
+                                                        placeholder="Enter your CGPA">
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                                <label class="form-label">Passing Year</label>
+                                                <input type="text" class="form-control" id="passingYear"
+                                                        placeholder="2029">
+                                        </div>
+
+                                </div>
+
+                                <!-- Skills -->
+
+                                <h3 class="section-title">💻 Technical Skills</h3>
+
+                                <div class="row">
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="C"> C
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="C++"> C++
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Java"> Java
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Python"> Python
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="SQL"> SQL
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="HTML"> HTML
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="CSS"> CSS
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="JavaScript"> JavaScript
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Flask"> Flask
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Git"> Git
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="GitHub"> GitHub
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="MySQL"> MySQL
+                                        </div>
+
+                                </div>
+
+                                <!-- Projects -->
+
+                                <h3 class="section-title">🚀 Projects</h3>
+
+                                <div class="mb-3">
+
+                                        <label class="form-label">Project Name</label>
+
+                                        <input type="text" class="form-control" id="projectName"
+                                                placeholder="Enter project name">
+
+                                </div>
+
+                                <div class="mb-4">
+
+                                        <label class="form-label">Project Description</label>
+
+                                        <textarea class="form-control" id="projectDescription" rows="5"
+                                                placeholder="Describe your project"></textarea>
+
+                                </div>
+
+                                <div class="mb-4">
+
+                                        <label class="form-label">Technologies Used</label>
+
+                                        <input type="text" class="form-control" id="technology"
+                                                placeholder="Example: Python, Flask, HTML, CSS, JavaScript">
+
+                                </div>
+                                <!-- Certifications -->
+
+                                <h3 class="section-title">🏆 Certifications</h3>
+
+                                <div class="mb-4">
+
+                                        <textarea class="form-control" id="certifications" rows="4"
+                                                placeholder="Example: Python Certification, Java Certification, NPTEL, Coursera, Infosys Springboard"></textarea>
+
+                                </div>
+
+                                <!-- Achievements -->
+
+                                <h3 class="section-title">🥇 Achievements</h3>
+
+                                <div class="mb-4">
+
+                                        <textarea class="form-control" id="achievements" rows="4"
+                                                placeholder="Mention your achievements, competitions, hackathons, awards, etc."></textarea>
+
+                                </div>
+
+                                <!-- Languages -->
+
+                                <h3 class="section-title">🌐 Languages Known</h3>
+
+                                <div class="row">
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="English"> English
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Hindi"> Hindi
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Punjabi"> Punjabi
+                                        </div>
+
+                                        <div class="col-md-3 mb-2">
+                                                <input type="checkbox" value="Other"> Other
+                                        </div>
+
+                                </div>
+
+                                <!-- Hobbies -->
+
+                                <h3 class="section-title">❤️ Hobbies</h3>
+
+                                <div class="mb-4">
+
+                                        <input type="text" class="form-control" id="hobbies"
+                                                placeholder="Example: Coding, Reading Books, Cricket, Music">
+
+                                </div>
+
+                                <!-- Resume Template -->
+
+                                <h3 class="section-title">📄 Resume Template</h3>
+
+                                <div class="mb-4">
+
+                                        <select class="form-select" id="template">
+
+                                                <option value="Professional">
+                                                        Professional
+                                                </option>
+
+                                                <option value="Modern">
+                                                        Modern
+                                                </option>
+
+                                                <option value="ATS Friendly">
+                                                        ATS Friendly
+                                                </option>
+
+                                        </select>
+
+                                </div>
+
+                                <div class="text-center">
+
+                                        <button type="button" class="btn btn-success btn-lg" onclick="generateResume()">
+
+                                                📄 Generate Resume
+
+                                        </button>
+
+                                </div>
+                                <!-- Resume Preview -->
+
+                                <div class="card p-4 mt-5 resume-preview" id="resumePreview">
+
+                                        <h2 class="text-center mb-4">
+                                                📄 Resume Preview
+                                        </h2>
+
+                                        <hr>
+
+                                        <h3 id="previewName"></h3>
+
+                                        <p id="previewEmail"></p>
+
+                                        <p id="previewPhone"></p>
+
+                                        <p id="previewAddress"></p>
+
+                                        <p id="previewLinkedin"></p>
+
+                                        <p id="previewGithub"></p>
+
+                                        <hr>
+
+                                        <h4>🎯 Career Objective</h4>
+
+                                        <p id="previewObjective"></p>
+
+                                        <hr>
+
+                                        <h4>🎓 Education</h4>
+
+                                        <p id="previewEducation"></p>
+
+                                        <hr>
+
+                                        <h4>💻 Technical Skills</h4>
+
+                                        <p id="previewSkills"></p>
+
+                                        <hr>
+
+                                        <h4>🚀 Project</h4>
+
+                                        <p id="previewProject"></p>
+
+                                        <p id="previewProjectDesc"></p>
+
+                                        <p id="previewTechnology"></p>
+
+                                        <hr>
+
+                                        <h4>🏆 Certifications</h4>
+
+                                        <p id="previewCertificate"></p>
+
+                                        <hr>
+
+                                        <h4>🥇 Achievements</h4>
+
+                                        <p id="previewAchievement"></p>
+
+                                        <hr>
+
+                                        <h4>🌐 Languages</h4>
+
+                                        <p id="previewLanguage"></p>
+
+                                        <hr>
+
+                                        <h4>❤️ Hobbies</h4>
+
+                                        <p id="previewHobby"></p>
+
+                                        <hr>
+
+                                        <h4>📄 Template</h4>
+
+                                        <p id="previewTemplate"></p>
+
+                                </div>
+
+                                <!-- Resume Score -->
+
+                                <div class="card p-4 mt-4 resume-preview" id="scoreCard">
+
+                                        <h2 class="text-center">
+
+                                                ⭐ Resume Score
+
+                                        </h2>
+
+                                        <h1 class="text-center text-success" id="resumeScore">
+
+                                                0 / 100
+
+                                        </h1>
+
+                                        <hr>
+
+                                        <h4>Suggestions</h4>
+
+                                        <ul id="suggestions">
+
+                                        </ul>
+
+                                        <div class="text-center">
+
+                                                <button class="btn btn-primary btn-lg" onclick="window.print()">
+
+                                                        🖨 Download / Print Resume
+
+                                                </button>
+
+                                        </div>
+
+                                </div>
+
+                                <script>
+
+                                        function generateResume() {
+
+                                                let skills = [];
+
+                                                document.querySelectorAll('input[type="checkbox"]:checked').forEach(function (item) {
+
+                                                        skills.push(item.value);
+
+                                                });
+
+                                                document.getElementById("previewName").innerHTML = document.getElementById("name").value;
+
+                                                document.getElementById("previewEmail").innerHTML = "<b>Email :</b> " + document.getElementById("email").value;
+
+                                                document.getElementById("previewPhone").innerHTML = "<b>Phone :</b> " + document.getElementById("phone").value;
+
+                                                document.getElementById("previewAddress").innerHTML = "<b>Address :</b> " + document.getElementById("address").value;
+
+                                                document.getElementById("previewLinkedin").innerHTML = "<b>LinkedIn :</b> " + document.getElementById("linkedin").value;
+
+                                                document.getElementById("previewGithub").innerHTML = "<b>GitHub :</b> " + document.getElementById("github").value;
+
+                                                document.getElementById("previewObjective").innerHTML = document.getElementById("objective").value;
+
+                                                document.getElementById("previewEducation").innerHTML =
+
+                                                        document.getElementById("degree").value +
+
+                                                        " | " +
+
+                                                        document.getElementById("college").value +
+
+                                                        " | CGPA : " +
+
+                                                        document.getElementById("cgpa").value +
+
+                                                        " | Passing Year : " +
+
+                                                        document.getElementById("passingYear").value;
+
+                                                document.getElementById("previewSkills").innerHTML = skills.join(", ");
+
+                                                document.getElementById("previewProject").innerHTML = document.getElementById("projectName").value;
+
+                                                document.getElementById("previewProjectDesc").innerHTML = document.getElementById("projectDescription").value;
+
+                                                document.getElementById("previewTechnology").innerHTML = document.getElementById("technology").value;
+
+                                                document.getElementById("previewCertificate").innerHTML = document.getElementById("certifications").value;
+
+                                                document.getElementById("previewAchievement").innerHTML = document.getElementById("achievements").value;
+
+                                                document.getElementById("previewLanguage").innerHTML = skills.join(", ");
+
+                                                document.getElementById("previewHobby").innerHTML = document.getElementById("hobbies").value;
+
+                                                document.getElementById("previewTemplate").innerHTML = document.getElementById("template").value;
+
+                                                document.getElementById("resumePreview").style.display = "block";
+
+                                                document.getElementById("scoreCard").style.display = "block";
+
+                                                let score = 40;
+
+                                                let suggestions = [];
+
+                                                if (document.getElementById("linkedin").value != "")
+                                                        score += 10;
+                                                else
+                                                        suggestions.push("Add LinkedIn profile.");
+
+                                                if (document.getElementById("github").value != "")
+                                                        score += 10;
+                                                else
+                                                        suggestions.push("Add GitHub profile.");
+
+                                                if (document.getElementById("projectName").value != "")
+                                                        score += 15;
+                                                else
+                                                        suggestions.push("Add at least one project.");
+
+                                                if (document.getElementById("certifications").value != "")
+                                                        score += 10;
+                                                else
+                                                        suggestions.push("Add certifications.");
+
+                                                if (skills.length >= 5)
+                                                        score += 15;
+                                                else
+                                                        suggestions.push("Add more technical skills.");
+
+                                                document.getElementById("resumeScore").innerHTML = score + " / 100";
+
+                                                let ul = document.getElementById("suggestions");
+
+                                                ul.innerHTML = "";
+
+                                                if (suggestions.length == 0) {
+
+                                                        ul.innerHTML = "<li>Excellent Resume 🎉 Ready for Placement.</li>";
+
+                                                }
+
+                                                else {
+
+                                                        suggestions.forEach(function (item) {
+
+                                                                ul.innerHTML += "<li>" + item + "</li>";
+
+                                                        });
+
+                                                }
+
+                                        }
+
+                                </script>
+
+                        </form>
+
+                </div>
+
+        </div>
+
+</body>
+
+</html>

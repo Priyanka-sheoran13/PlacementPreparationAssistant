@@ -3,6 +3,17 @@ from flask_sqlalchemy import SQLAlchemy
 from data.easy_questions import easy_questions
 from data.medium_questions import medium_questions
 from data.hard_questions import hard_questions
+from python_questions import python_questions
+from java_questions import java_questions
+from cpp_questions import cpp_questions
+from c_questions import c_questions
+from sql_questions import sql_questions
+from interview_questions import interview_questions
+from flask import render_template, request, send_file
+from company_questions import company_data
+from chatbot import chatbot_responses
+from flask import Flask, render_template, request, redirect, url_for, jsonify
+
 app = Flask(__name__)
 
 # Database Configuration
@@ -17,13 +28,18 @@ class User(db.Model):
     name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
-# Quiz Result Table
 class QuizResult(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_email = db.Column(db.String(100), nullable=False)
+
     level = db.Column(db.String(20), nullable=False)
+
     score = db.Column(db.Integer, nullable=False)
-    total_questions = db.Column(db.Integer, nullable=False)
+
+    total = db.Column(db.Integer, nullable=False)
+
+    percentage = db.Column(db.Integer, nullable=False)
+
+
 # Quiz Question Table
 class Question(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -98,23 +114,23 @@ def aptitude():
     return render_template("aptitude_home.html")
 
 
-
-
-@app.route("/coding")
-def coding():
-    return render_template("coding.html")
-
 @app.route("/resume")
 def resume():
-    return render_template("resume.html")
 
+    return render_template("resume.html")
 @app.route("/interview")
 def interview():
-    return render_template("interview.html")
 
+    return render_template(
+        "interview.html",
+        questions=interview_questions
+    )
 @app.route("/company")
 def company():
-    return render_template("company.html")
+    return render_template(
+        "company.html",
+        companies=company_data
+    )
 
 @app.route("/planner")
 def planner():
@@ -126,9 +142,26 @@ def progress():
 @app.route("/logout")
 def logout():
     return redirect("/")
-@app.route("/ai")
-def ai():
-    return "<h1>🤖 AI Placement Assistant Coming Soon</h1>"
+@app.route("/chatbot")
+def chatbot():
+    return render_template("chatbot.html")
+@app.route("/chat", methods=["POST"])
+def chat():
+
+    user_message = request.json.get("message", "").lower()
+
+    reply = "🤖 Sorry! I don't understand that yet. Try asking about Python, Java, SQL, DBMS, Resume, Placement or Interview."
+
+    for keyword, response in chatbot_responses.items():
+
+        if keyword in user_message:
+
+            reply = response
+            break
+
+    return jsonify({
+        "reply": reply
+    })
 @app.route("/easy")
 def easy():
     return render_template("easy_instruction.html")
@@ -166,6 +199,16 @@ def medium_result():
     else:
         grade = "Fail"
 
+    result = QuizResult(
+        level="Medium",
+        score=score,
+        total=total,
+        percentage=percentage
+    )
+
+    db.session.add(result)
+    db.session.commit()
+
     return render_template(
         "medium_result.html",
         score=score,
@@ -201,6 +244,17 @@ def easy_result():
         grade = "C"
     else:
         grade = "Fail"
+   
+   
+    result = QuizResult(
+        level="Easy",
+        score=score,
+        total=total,
+        percentage=percentage
+    )
+
+    db.session.add(result)
+    db.session.commit()
 
     return render_template(
         "easy_result.html",
@@ -239,6 +293,47 @@ def hard_result():
         percentage=percentage,
         grade=grade
     )
-if __name__ == "__main__":
-    app.run(debug=True)
+@app.route("/coding")
+def coding():
+    return render_template("coding.html")
+@app.route("/python")
+def python():
+    return render_template(
+        "python.html",
+        questions=python_questions
+    )
+@app.route("/c")
+def c():
+    return render_template(
+        "c.html",
+        questions=c_questions
+    )
+
+@app.route("/cpp")
+def cpp():
+
+    return render_template(
+        "cpp.html",
+        questions=cpp_questions
+    )
+
+@app.route("/java")
+def java():
+
+    return render_template(
+        "java.html",
+        questions=java_questions
+    )
+
+@app.route("/sql")
+def sql():
+
+    return render_template(
+        "sql.html",
+        questions=sql_questions
+    )
     
+if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)    

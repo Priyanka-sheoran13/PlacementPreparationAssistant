@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+        <meta charset="UTF-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Python Coding Practice</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <style>
+                body {
+
+                        background: #eef2f7;
+
+                        font-family: Arial, sans-serif;
+
+                }
+
+                .header {
+
+                        background: linear-gradient(135deg, #198754, #20c997);
+
+                        color: white;
+
+                        padding: 40px;
+
+                        text-align: center;
+
+                }
+
+                .header h1 {
+
+                        font-size: 45px;
+
+                        font-weight: bold;
+
+                }
+
+                .main-box {
+
+                        max-width: 1100px;
+
+                        margin: auto;
+
+                        margin-top: 40px;
+
+                }
+
+                .card {
+
+                        border: none;
+
+                        border-radius: 20px;
+
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, .15);
+
+                        padding: 30px;
+
+                }
+
+                .progress {
+
+                        height: 18px;
+
+                        border-radius: 20px;
+
+                }
+
+                #questionTitle {
+
+                        font-size: 34px;
+
+                        font-weight: bold;
+
+                        margin-top: 20px;
+
+                }
+
+                .badge {
+
+                        font-size: 15px;
+
+                }
+
+                pre {
+
+                        background: #212529;
+
+                        color: #00ff99;
+
+                        padding: 15px;
+
+                        border-radius: 10px;
+
+                }
+
+                textarea {
+
+                        width: 100%;
+
+                        height: 300px;
+
+                        border-radius: 10px;
+
+                        border: 2px solid #198754;
+
+                        padding: 15px;
+
+                        font-family: Consolas;
+
+                        font-size: 16px;
+
+                        resize: none;
+
+                }
+
+                .btn {
+
+                        border-radius: 10px;
+
+                }
+
+                #solutionBox {
+
+                        display: none;
+
+                        margin-top: 25px;
+
+                }
+
+                #resultBox {
+
+                        display: none;
+
+                        margin-top: 35px;
+
+                }
+        </style>
+
+</head>
+
+<body>
+
+        <div class="header">
+
+                <h1>🐍 Python Coding Practice</h1>
+
+                <p class="fs-5">
+
+                        Top 30 Placement Coding Questions
+
+                </p>
+
+        </div>
+
+        <div class="container">
+
+                <div class="main-box">
+
+                        <div class="card">
+
+                                <div class="d-flex justify-content-between">
+
+                                        <h4 id="questionNo">
+
+                                                Question 1 / 30
+
+                                        </h4>
+
+                                        <span id="difficulty" class="badge bg-danger">
+
+                                                Hard
+
+                                        </span>
+
+                                </div>
+
+                                <div class="progress mt-3">
+
+                                        <div class="progress-bar bg-success" id="progressBar" style="width:3%">
+
+                                        </div>
+
+                                </div>
+
+                                <h2 id="questionTitle">
+
+                                </h2>
+
+                                <p class="mt-4" id="description">
+
+                                </p>
+
+                                <hr>
+
+                                <h5>
+
+                                        📥 Sample Input
+
+                                </h5>
+
+                                <pre id="input"></pre>
+
+                                <h5 class="mt-4">
+
+                                        📤 Sample Output
+
+                                </h5>
+
+                                <pre id="output"></pre>
+
+                                <hr>
+
+                                <h4>
+
+                                        💻 Write Your Code
+
+                                </h4>
+
+                                <textarea id="codeEditor" placeholder="Write your Python code here...">
+
+</textarea>
+
+                                <br><br>
+
+                                <button class="btn btn-success" onclick="showSolution()">
+
+                                        Show Solution
+
+                                </button>
+
+                                <button class="btn btn-primary" onclick="copySolution()">
+
+                                        Copy Solution
+
+                                </button>
+
+                                <div id="solutionBox">
+
+                                        <h4 class="mt-4">
+
+                                                Solution
+
+                                        </h4>
+
+                                        <pre id="solution"></pre>
+
+                                </div>
+
+                                <div class="form-check mt-4">
+
+                                        <input class="form-check-input" type="checkbox" id="completed">
+
+                                        <label class="form-check-label">
+
+                                                Mark this question as completed
+
+                                        </label>
+
+                                </div>
+
+                                <hr>
+
+                                <div class="d-flex justify-content-between">
+
+                                        <button class="btn btn-secondary" onclick="previousQuestion()">
+
+                                                Previous
+
+                                        </button>
+
+                                        <button class="btn btn-success" onclick="nextQuestion()">
+
+                                                Next
+
+                                        </button>
+
+                                </div>
+
+                                <div class="text-center mt-5">
+
+                                        <button class="btn btn-danger btn-lg" onclick="submitPractice()">
+
+                                                Submit Practice
+
+                                        </button>
+
+                                </div>
+
+                        </div>
+
+                        <div id="resultBox" class="card text-center">
+
+                                <h1>
+
+                                        🎉 Practice Completed
+
+                                </h1>
+
+                                <h2 id="completedText"></h2>
+
+                                <h2 id="percentageText"></h2>
+
+                                <h2 id="gradeText"></h2>
+
+                                <button class="btn btn-success btn-lg mt-4" onclick="location.reload()">
+
+                                        Restart Practice
+
+                                </button>
+
+                        </div>
+
+                </div>
+
+        </div>
+
+        <script>
+                let currentQuestion = 0;
+
+                let completed = [];
+
+                const questions = [
+
+                        {
+                                title: "Two Sum",
+                                difficulty: "Medium",
+                                description: "Given an array of integers nums and an integer target, return indices of the two numbers whose sum equals target.",
+                                input: "nums = [2,7,11,15]\ntarget = 9",
+                                output: "[0,1]",
+                                solution: `def twoSum(nums,target):
+    d={}
+    for i,n in enumerate(nums):
+        if target-n in d:
+            return [d[target-n],i]
+        d[n]=i`
+                        },
+
+                        {
+                                title: "Valid Parentheses",
+                                difficulty: "Medium",
+                                description: "Determine whether the input string has valid parentheses.",
+                                input: 's="()[]{}"',
+                                output: "True",
+                                solution: `def isValid(s):
+    stack=[]
+    d={')':'(',']':'[','}':'{'}
+    for c in s:
+        if c in "([{":
+            stack.append(c)
+        else:
+            if not stack or stack.pop()!=d[c]:
+                return False
+    return True`
+                        },
+
+                        {
+                                title: "Merge Sorted Arrays",
+                                difficulty: "Medium",
+                                description: "Merge two sorted arrays.",
+                                input: "[1,2,4]\n[1,3,4]",
+                                output: "[1,1,2,3,4,4]",
+                                solution: `def merge(a,b):
+    return sorted(a+b)`
+                        },
+
+                        {
+                                title: "Longest Common Prefix",
+                                difficulty: "Medium",
+                                description: "Find the longest common prefix.",
+                                input: '["flower","flow","flight"]',
+                                output: "fl",
+                                solution: `def lcp(arr):
+    p=arr[0]
+    for s in arr:
+        while not s.startswith(p):
+            p=p[:-1]
+    return p`
+                        },
+
+                        {
+                                title: "Binary Search",
+                                difficulty: "Medium",
+                                description: "Search target in sorted array.",
+                                input: "nums=[1,2,3,4,5]\ntarget=4",
+                                output: "3",
+                                solution: `def search(nums,target):
+    l=0
+    r=len(nums)-1
+    while l<=r:
+        m=(l+r)//2
+        if nums[m]==target:
+            return m
+        elif nums[m]<target:
+            l=m+1
+        else:
+            r=m-1
+    return -1`
+                        },
+
+                        {
+                                title: "Product of Array Except Self",
+                                difficulty: "Medium",
+                                description: "Return product of array except self.",
+                                input: "[1,2,3,4]",
+                                output: "[24,12,8,6]",
+                                solution: `def productExceptSelf(nums):
+    n=len(nums)
+    ans=[1]*n
+    left=1
+    for i in range(n):
+        ans[i]=left
+        left*=nums[i]
+    right=1
+    for i in range(n-1,-1,-1):
+        ans[i]*=right
+        right*=nums[i]
+    return ans`
+                        },
+
+                        {
+                                title: "Top K Frequent Elements",
+                                difficulty: "Medium",
+                                description: "Find k most frequent numbers.",
+                                input: "nums=[1,1,1,2,2,3],k=2",
+                                output: "[1,2]",
+                                solution: `from collections import Counter
+
+def topK(nums,k):
+    return [i for i,j in Counter(nums).most_common(k)]`
+                        },
+
+                        {
+                                title: "Container With Most Water",
+                                difficulty: "Medium",
+                                description: "Find maximum water container.",
+                                input: "[1,8,6,2,5,4,8,3,7]",
+                                output: "49",
+                                solution: `def maxArea(h):
+    l=0
+    r=len(h)-1
+    ans=0
+    while l<r:
+        ans=max(ans,min(h[l],h[r])*(r-l))
+        if h[l]<h[r]:
+            l+=1
+        else:
+            r-=1
+    return ans`
+                        },
+
+                        {
+                                title: "Longest Consecutive Sequence",
+                                difficulty: "Medium",
+                                description: "Find longest consecutive sequence.",
+                                input: "[100,4,200,1,3,2]",
+                                output: "4",
+                                solution: `def longest(nums):
+    s=set(nums)
+    best=0
+    for n in s:
+        if n-1 not in s:
+            x=n
+            while x in s:
+                x+=1
+            best=max(best,x-n)
+    return best`
+                        },
+
+                        {
+                                title: "Find Duplicate Number",
+                                difficulty: "Medium",
+                                description: "Find duplicate number.",
+                                input: "[1,3,4,2,2]",
+                                output: "2",
+                                solution: `def findDuplicate(nums):
+    seen=set()
+    for i in nums:
+        if i in seen:
+            return i
+        seen.add(i)`
+                        },
+
+                        {
+                                title: "Search in Rotated Sorted Array",
+                                difficulty: "Hard",
+                                description: "Search target in rotated sorted array.",
+                                input: "nums=[4,5,6,7,0,1,2]",
+                                output: "4",
+                                solution: `# Binary Search Solution`
+                        },
+
+                        {
+                                title: "3Sum",
+                                difficulty: "Hard",
+                                description: "Find all triplets whose sum is zero.",
+                                input: "[-1,0,1,2,-1,-4]",
+                                output: "[[-1,-1,2],[-1,0,1]]",
+                                solution: `# Two Pointer Solution`
+                        },
+
+                        {
+                                title: "Group Anagrams",
+                                difficulty: "Hard",
+                                description: "Group all anagrams together.",
+                                input: '["eat","tea","tan","ate"]',
+                                output: '[["eat","tea","ate"],["tan"]]',
+                                solution: `# Hash Map Solution`
+                        },
+
+                        {
+                                title: "Number of Islands",
+                                difficulty: "Hard",
+                                description: "Count islands in grid.",
+                                input: "grid",
+                                output: "3",
+                                solution: `# DFS Solution`
+                        },
+
+                        {
+                                title: "Course Schedule",
+                                difficulty: "Hard",
+                                description: "Check if all courses can be finished.",
+                                input: "2 [[1,0]]",
+                                output: "True",
+                                solution: `# Topological Sort`
+                        },
+                ];
+                questions.push(
+
+                        {
+                                title: "Kth Largest Element",
+                                difficulty: "Hard",
+                                description: "Find the kth largest element in an array.",
+                                input: "nums=[3,2,1,5,6,4], k=2",
+                                output: "5",
+                                solution: `import heapq
+
+def findKthLargest(nums,k):
+    return heapq.nlargest(k,nums)[-1]`
+                        },
+
+                        {
+                                title: "Merge K Sorted Lists",
+                                difficulty: "Hard",
+                                description: "Merge k sorted linked lists.",
+                                input: "[[1,4,5],[1,3,4],[2,6]]",
+                                output: "[1,1,2,3,4,4,5,6]",
+                                solution: `# Heap Solution`
+                        },
+
+                        {
+                                title: "Trapping Rain Water",
+                                difficulty: "Hard",
+                                description: "Calculate trapped rain water.",
+                                input: "[0,1,0,2,1,0,1,3,2,1,2,1]",
+                                output: "6",
+                                solution: `# Two Pointer Solution`
+                        },
+
+                        {
+                                title: "Word Ladder",
+                                difficulty: "Hard",
+                                description: "Shortest transformation sequence.",
+                                input: "hit → cog",
+                                output: "5",
+                                solution: `# BFS Solution`
+                        },
+
+                        {
+                                title: "Median of Two Sorted Arrays",
+                                difficulty: "Hard",
+                                description: "Find median in O(log n).",
+                                input: "[1,3] [2]",
+                                output: "2.0",
+                                solution: `# Binary Search`
+                        },
+
+                        {
+                                title: "LRU Cache",
+                                difficulty: "Hard",
+                                description: "Design LRU Cache.",
+                                input: "capacity=2",
+                                output: "Cache",
+                                solution: `# OrderedDict Solution`
+                        },
+
+                        {
+                                title: "N Queens",
+                                difficulty: "Hard",
+                                description: "Place N queens safely.",
+                                input: "n=4",
+                                output: "2 Solutions",
+                                solution: `# Backtracking`
+                        },
+
+                        {
+                                title: "Sudoku Solver",
+                                difficulty: "Hard",
+                                description: "Solve Sudoku board.",
+                                input: "9x9 Board",
+                                output: "Solved",
+                                solution: `# DFS + Backtracking`
+                        },
+
+                        {
+                                title: "Serialize Binary Tree",
+                                difficulty: "Hard",
+                                description: "Serialize and Deserialize Tree.",
+                                input: "Binary Tree",
+                                output: "Serialized Tree",
+                                solution: `# BFS`
+                        },
+
+                        {
+                                title: "Alien Dictionary",
+                                difficulty: "Hard",
+                                description: "Find order of alien language.",
+                                input: '["wrt","wrf","er","ett","rftt"]',
+                                output: "wertf",
+                                solution: `# Topological Sort`
+                        },
+
+                        {
+                                title: "Minimum Window Substring",
+                                difficulty: "Hard",
+                                description: "Find smallest substring containing all characters.",
+                                input: 's="ADOBECODEBANC"',
+                                output: "BANC",
+                                solution: `# Sliding Window`
+                        },
+
+                        {
+                                title: "Regular Expression Matching",
+                                difficulty: "Hard",
+                                description: "Regex Matching using . and *",
+                                input: '"aab"',
+                                output: "True",
+                                solution: `# Dynamic Programming`
+                        },
+
+                        {
+                                title: "Word Search",
+                                difficulty: "Hard",
+                                description: "Search word in board.",
+                                input: "Board + Word",
+                                output: "True",
+                                solution: `# DFS`
+                        },
+
+                        {
+                                title: "Combination Sum",
+                                difficulty: "Hard",
+                                description: "Find all possible combinations.",
+                                input: "[2,3,6,7]",
+                                output: "[[2,2,3],[7]]",
+                                solution: `# Backtracking`
+                        },
+
+                        {
+                                title: "Maximum Subarray",
+                                difficulty: "Medium",
+                                description: "Find maximum sum contiguous subarray.",
+                                input: "[-2,1,-3,4,-1,2,1,-5,4]",
+                                output: "6",
+                                solution: `def maxSubArray(nums):
+    best=nums[0]
+    cur=0
+    for x in nums:
+        cur=max(x,cur+x)
+        best=max(best,cur)
+    return best`
+                        }
+
+                );
+                function loadQuestion() {
+
+                        let q = questions[currentQuestion];
+
+                        document.getElementById("questionNo").innerHTML =
+                                "Question " + (currentQuestion + 1) + " / " + questions.length;
+
+                        document.getElementById("questionTitle").innerHTML = q.title;
+
+                        document.getElementById("description").innerHTML = q.description;
+
+                        document.getElementById("input").textContent = q.input;
+
+                        document.getElementById("output").textContent = q.output;
+
+                        document.getElementById("solution").textContent = q.solution;
+
+                        document.getElementById("difficulty").innerHTML = q.difficulty;
+
+                        if (q.difficulty == "Hard") {
+
+                                document.getElementById("difficulty").className = "badge bg-danger";
+
+                        }
+
+                        else {
+
+                                document.getElementById("difficulty").className = "badge bg-warning text-dark";
+
+                        }
+
+                        document.getElementById("completed").checked =
+                                completed[currentQuestion] || false;
+
+                        document.getElementById("progressBar").style.width =
+                                ((currentQuestion + 1) / questions.length * 100) + "%";
+
+                        document.getElementById("solutionBox").style.display = "none";
+
+                }
+
+
+                function nextQuestion() {
+
+                        completed[currentQuestion] =
+                                document.getElementById("completed").checked;
+
+                        if (currentQuestion < questions.length - 1) {
+
+                                currentQuestion++;
+
+                                loadQuestion();
+
+                        }
+
+                }
+
+
+                function previousQuestion() {
+
+                        completed[currentQuestion] =
+                                document.getElementById("completed").checked;
+
+                        if (currentQuestion > 0) {
+
+                                currentQuestion--;
+
+                                loadQuestion();
+
+                        }
+
+                }
+
+
+                function showSolution() {
+
+                        document.getElementById("solutionBox").style.display = "block";
+
+                }
+
+
+                function copySolution() {
+
+                        navigator.clipboard.writeText(
+                                questions[currentQuestion].solution
+                        );
+
+                        alert("Solution Copied!");
+
+                }
+
+
+                function submitPractice() {
+
+                        completed[currentQuestion] =
+                                document.getElementById("completed").checked;
+
+                        let solved = completed.filter(x => x).length;
+
+                        let percentage =
+                                Math.round((solved / questions.length) * 100);
+                        localStorage.setItem("python", percentage);
+
+                        let grade = "Fail";
+
+                        if (percentage >= 90) {
+
+                                grade = "A+";
+
+                        }
+
+                        else if (percentage >= 80) {
+
+                                grade = "A";
+
+                        }
+
+                        else if (percentage >= 70) {
+
+                                grade = "B";
+
+                        }
+
+                        else if (percentage >= 60) {
+
+                                grade = "C";
+
+                        }
+
+                        document.querySelector(".card").style.display = "none";
+
+                        document.getElementById("resultBox").style.display = "block";
+
+                        document.getElementById("completedText").innerHTML =
+                                "Completed : " + solved + " / " + questions.length;
+
+                        document.getElementById("percentageText").innerHTML =
+                                "Percentage : " + percentage + "%";
+
+                        document.getElementById("gradeText").innerHTML =
+                                "Grade : " + grade;
+
+                }
+
+                loadQuestion();
+
+        </script>
+
+</body>
+
+</html>
